@@ -99,4 +99,5 @@ except SympifyError as e:
     st.error(f"Invalid Expression: {e}")
 
 # ---------------- FOOTER ----------------
-st.markdown(\"\"\"<hr><center>✨ Created with 💖 by Usama Sharif</center>\"\"\", unsafe_allow_html=True)
+st.markdown("<hr><center>✨ Created with 💖 by Usama Sharif</center>", unsafe_allow_html=True)
+
