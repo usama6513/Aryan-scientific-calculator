@@ -70,7 +70,7 @@ if st.button("Calculate Matrix Operation"):
 st.subheader("🧠 Derivatives & Integrals")
 
 expression_input = st.text_input("Enter expression (e.g., x**2 + y**2):", "x**2 + y**2")
-variables_input = st.text_input("Enter variables separated by commas (e.g., x,y):", "x,y")
+variables_input = st.text_input("Enter variables separated by commas (e.g., x,y):", "x,y,2x,3x,4x,5x,6x,7x8x,9x,10x,2y,3y,4y,5y,6y,7y,8y,9y,10y")
 
 operation_type = st.selectbox("Choose operation", ["Derivative", "Indefinite Integral", "Definite Integral"])
 
