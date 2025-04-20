@@ -1,19 +1,62 @@
-body {
+/* Use Roboto Font from Google */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+html, body, [class*="st-"] {
     font-family: 'Roboto', sans-serif;
+    background-color: rgba(245, 245, 250, 0.9);
+    color: #333;
 }
 
-h1, h2, h3 {
-    color: #007ACC;
+/* Title Styling */
+h1 {
+    color: #2e86de;
+    text-align: center;
+    font-weight: 700;
 }
 
+/* Subheader */
+h2, h3 {
+    color: #4a69bd;
+    margin-top: 30px;
+}
+
+/* Buttons */
+button {
+    font-weight: bold;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    padding: 8px 16px;
+    margin-top: 10px;
+}
+
+/* Button hover effect */
 button:hover {
-    background-color: #4CAF50 !important;
+    background-color: #2e86de !important;
     color: white !important;
 }
 
+/* Inputs and text boxes */
+input, textarea {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Success box */
+.stAlert-success {
+    background-color: rgba(144, 238, 144, 0.3);
+    border-left: 4px solid green;
+}
+
+/* Error box */
+.stAlert-error {
+    background-color: rgba(255, 0, 0, 0.1);
+    border-left: 4px solid red;
+}
+
+/* Footer */
 .footer {
     text-align: center;
-    margin-top: 50px;
-    color: #888;
-    font-size: 14px;
+    margin-top: 60px;
+    font-size: 0.9rem;
+    color: #777;
 }
