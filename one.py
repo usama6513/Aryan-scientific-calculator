@@ -1,24 +1,43 @@
 import streamlit as st
 import numpy as np
 import math
-from sympy import symbols, diff, integrate, sympify, pi, SympifyError, sin, cos, tan
-import os
+from sympy import symbols, diff, integrate, sympify, pi, sin, cos, tan, SympifyError
 
-# safe css loader
-css_path = 'assets/style.css'
-if os.path.exists(css_path):
-    with open(css_path) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-else:
-    st.warning("⚠️ style.css not found in assets/ folder.")
+# ✅ Inject Custom CSS
+st.markdown("""
+    <style>
+        body {
+            background-color: #f7f9fc;
+        }
+        h1, h2 {
+            color: #2e86de;
+            text-align: center;
+        }
+        .stButton>button {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 6px;
+            padding: 10px 18px;
+            transition: 0.3s ease;
+        }
+        .stButton>button:hover {
+            background-color: #2e7d32;
+        }
+        .footer {
+            margin-top: 50px;
+            color: #888;
+            text-align: center;
+            font-size: 13px;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
-
-
-
-# Page config (must be first)
+# ✅ Page Title
 st.set_page_config(page_title="Scientific Calculator", layout="centered")
-
 st.title("🧮 Scientific Calculator")
+
+# ...continue with your app
+
 
 # ---------------- TRIGONOMETRIC FUNCTIONS ----------------
 st.subheader("📐 Trigonometric Functions")
