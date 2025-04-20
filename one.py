@@ -106,23 +106,34 @@ st.title("🧮 Scientific Calculator")
 
 # Trigonometric Functions st.error(f"⚠️ Invalid input: {e}")
 # ---------------- TRIGONOMETRIC FUNCTIONS ----------------
-st.subheader("📐 Trigonometric Functions")
+st.subheader("🧮 Trigonometric Functions")
+
 shift = st.checkbox("Shift (Inverse Functions)")
 angle_input = st.number_input("Enter angle in degrees:", value=0.0)
 
-angle_rad = math.radians(angle_input)
+if st.button("🧠 Compute Trigonometric Values"):
+    angle_rad = math.radians(angle_input)
 
-if shift:
-    try:
-        st.write(f"arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
-        st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
-        st.write(f"arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
-    except ValueError:
-        st.error("❌ Invalid input for inverse functions.")
-else:
-    st.write(f"sin({angle_input}°) = {math.sin(angle_rad):.4f}")
-    st.write(f"cos({angle_input}°) = {math.cos(angle_rad):.4f}")
-    st.write(f"tan({angle_input}°) = {math.tan(angle_rad):.4f}")
+    if shift:
+        try:
+            st.markdown(f"""
+            <div class='result-box'>
+                arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°<br>
+                arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°<br>
+                arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°
+            </div>
+            """, unsafe_allow_html=True)
+        except ValueError:
+            st.error("Invalid input for inverse trigonometric functions.")
+    else:
+        st.markdown(f"""
+        <div class='result-box'>
+            sin({angle_input}°) = {math.sin(angle_rad):.4f}<br>
+            cos({angle_input}°) = {math.cos(angle_rad):.4f}<br>
+            tan({angle_input}°) = {math.tan(angle_rad):.4f}
+        </div>
+        """, unsafe_allow_html=True)
+
 
 # ---------------- MATRIX OPERATIONS ----------------
 st.subheader("🔢 Matrix Operations")
