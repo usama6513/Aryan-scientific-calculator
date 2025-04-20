@@ -119,7 +119,7 @@ angle_rad = math.radians(angle_input)  # Convert degree to radians
 if shift:
     if st.button("🧠 Compute Inverse Trigonometric Values"):
         try:
-            result_html = f"""
+            st.markdown = f"""
                 <div style='
                     background-color: #172a45;
                     border-left: 5px solid #1abc9c;
