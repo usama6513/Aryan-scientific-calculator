@@ -74,8 +74,17 @@ variables_input = st.text_input("Enter variables separated by commas (e.g., x,y)
 
 operation_type = st.selectbox("Choose operation", ["Derivative", "Indefinite Integral", "Definite Integral"])
 
-variables = symbols(variables_input)
-expr = sympify(expression_input)
+try:
+    if variables_input.strip() and expression_input.strip():
+        variables = symbols(variables_input)
+        expr = sympify(expression_input)
+    else:
+        st.warning("Please enter a valid expression and variable(s).")
+        st.stop()
+except Exception as e:
+    st.error(f"Error parsing expression or variables: {e}")
+    st.stop()
+
 
 if operation_type == "Derivative":
     var_to_diff = st.selectbox("Differentiate with respect to:", variables)
