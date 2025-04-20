@@ -14,9 +14,6 @@ import numpy as np
 import math
 from sympy import symbols, diff, integrate, sympify
 
-#Load custom CSS
-with open("assets/style.css") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 #Page configuration
 st.set_page_config(page_title="Scientific Calculator", layout="centered")
