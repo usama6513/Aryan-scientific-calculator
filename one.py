@@ -47,7 +47,7 @@ import numpy as np
 import math
 from sympy import symbols, diff, integrate, sympify
 
-st
+
 
 # Custom CSS for enhanced UI (UI ko behtr bnane k lie custom styling)
 st.markdown(
