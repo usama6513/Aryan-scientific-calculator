@@ -8,13 +8,13 @@ from sympy import symbols, diff, integrate, sympify, pi, sin, cos, tan
 st.set_page_config(page_title="Scientific Calculator", layout="centered")
 
 # ✅ Inject Custom CSS (right after imports)
-# Inject Custom CSS (right after imports)
+
 st.markdown("""
     <style>
         body {
-            background-color: #001f3d;  /* Navy Blue color for background */
+            background-color: #f0f8ff;  /* Light Alice Blue color */
             font-family: 'Roboto', sans-serif;
-            color: #ffffff;  /* White text for contrast */
+            color: #333333;  /* Dark gray text for contrast */
         }
         h1, h2 {
             color: #2e86de;  /* Soft Blue color for headers */
@@ -95,14 +95,13 @@ st.markdown("""
         
         /* Results Box Styling */
         .result-box {
-            background-color: #2e3b50;  /* Dark Navy Blue background */
-            border: 1px solid #2e86de;  /* Blue border */
+            background-color: #e8f4f9;
+            border: 1px solid #2e86de;
             padding: 15px;
             border-radius: 8px;
             font-size: 16px;
             margin-top: 20px;
             margin-bottom: 30px;
-            color: #ffffff;
         }
         .result-box > div {
             padding: 5px;
