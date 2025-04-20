@@ -39,22 +39,7 @@ st.set_page_config(page_title="Scientific Calculator", layout="centered")
 # Title
 st.title("🧮 Scientific Calculator")
 
-# Example Inputs (for Trigonometry, Derivatives, etc.)
-angle_input = st.number_input("Enter angle in degrees:", value=30.0)
-shift = st.checkbox("Shift (Inverse Functions)")
 
-# Trigonometric and inverse trigonometric calculations
-if shift:
-    st.write(f"arcsin({math.sin(math.radians(angle_input))}) = {math.degrees(math.asin(math.sin(math.radians(angle_input)))):.4f}°")
-    st.write(f"arccos({math.cos(math.radians(angle_input))}) = {math.degrees(math.acos(math.cos(math.radians(angle_input)))):.4f}°")
-    st.write(f"arctan({math.tan(math.radians(angle_input))}) = {math.degrees(math.atan(math.tan(math.radians(angle_input)))):.4f}°")
-else:
-    st.write(f"sin({angle_input}°) = {math.sin(math.radians(angle_input)):.4f}")
-    st.write(f"cos({angle_input}°) = {math.cos(math.radians(angle_input)):.4f}")
-    st.write(f"tan({angle_input}°) = {math.tan(math.radians(angle_input)):.4f}")
-
-# Footer (adding custom footer message)
-st.markdown("<div class='footer'>Created with 💖 by Usama Sharif</div>", unsafe_allow_html=True)
 
           
 # ...continue with your app
