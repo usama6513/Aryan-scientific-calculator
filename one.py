@@ -61,7 +61,7 @@ st.markdown("""
         .stTextArea>div>textarea::placeholder {
             color: #bbb;  /* Placeholder text color */
         }
-        
+
         /* Margin and Padding Adjustments for Inputs and Results */
         .stTextInput, .stTextArea, .stSelectbox {
             margin-top: 20px;
@@ -92,7 +92,7 @@ st.markdown("""
             font-size: 17px;
             cursor: pointer;
         }
-        
+
         /* Results Box Styling */
         .result-box {
             background-color: #2e3b50;  /* Dark Navy Blue background */
@@ -108,7 +108,7 @@ st.markdown("""
             padding: 5px;
             font-size: 16px;
         }
-        
+
         /* Alert Box Style */
         .stAlert {
             background-color: #f9c2c2;  /* Light red for alerts */
@@ -127,7 +127,6 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-
 
             
 # Title
