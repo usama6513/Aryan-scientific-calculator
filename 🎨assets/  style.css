@@ -3,7 +3,8 @@
 
 html, body, [class*="st-"] {
     font-family: 'Roboto', sans-serif;
-    background-color: rgba(245, 245, 250, 0.9);
+    background: linear-gradient(120deg, #e0f7fa, #f3e5f5);
+
     color: #333;
 }
 
