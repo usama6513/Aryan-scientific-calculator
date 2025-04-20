@@ -116,13 +116,22 @@ if st.button("🧠 Compute Trigonometric Values"):
 
     if shift:
         try:
-            st.markdown(f"""
-            <div class='result-box'>
-                arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°<br>
-                arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°<br>
-                arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°
-            </div>
-            """, unsafe_allow_html=True)
+           st.markdown(f"""
+    <div style='
+        background-color: #172a45;
+        border-left: 5px solid #1abc9c;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 17px;
+        margin-top: 20px;
+        color: white;
+    '>
+        sin({angle_input}°) = {math.sin(angle_rad):.4f}<br>
+        cos({angle_input}°) = {math.cos(angle_rad):.4f}<br>
+        tan({angle_input}°) = {math.tan(angle_rad):.4f}
+    </div>
+""", unsafe_allow_html=True)
+
         except ValueError:
             st.error("Invalid input for inverse trigonometric functions.")
     else:
