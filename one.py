@@ -11,28 +11,57 @@ st.set_page_config(page_title="Scientific Calculator", layout="centered")
 st.markdown("""
     <style>
         body {
-            background-color: #f7f9fc;
+            background-color: #f0f8ff;  /* Light Alice Blue color */
             font-family: 'Roboto', sans-serif;
+            color: #333333;  /* Dark gray text for contrast */
         }
         h1, h2 {
-            color: #2e86de;
+            color: #2e86de;  /* Soft Blue color for headers */
             text-align: center;
         }
         .stButton>button {
-            background-color: #4CAF50;
+            background-color: #4CAF50;  /* Green button */
             color: white;
             border-radius: 6px;
             padding: 10px 18px;
             transition: 0.3s ease;
         }
         .stButton>button:hover {
-            background-color: #2e7d32;
+            background-color: #2e7d32;  /* Darker green on hover */
+        }
+        .stTextInput>div>input {
+            background-color: #ffffff;
+            border: 1px solid #ddd;  /* Light border for text inputs */
+            border-radius: 4px;
+            padding: 8px;
+            margin: 6px 0;
+        }
+        .stTextArea>div>textarea {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px;
+            margin: 6px 0;
+        }
+        .stSelectbox>div>div>input {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px;
+            margin: 6px 0;
         }
         .footer {
             margin-top: 50px;
             color: #888;
             text-align: center;
             font-size: 13px;
+        }
+        .stAlert {
+            background-color: #f9c2c2;  /* Light red for alerts */
+            border: 1px solid #f2a1a1;
+            color: #d40000;
+            padding: 12px;
+            border-radius: 4px;
         }
     </style>
 """, unsafe_allow_html=True)
