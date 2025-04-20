@@ -157,7 +157,7 @@ else:
         """
         st
             st.markdown(result_html, unsafe_allow_html=True)
-        except ValueError:
+      
             st.error("⚠️ Invalid input for inverse trigonometric functions.")
 else:
     if st.button("🧠 Compute Trigonometric Values"):
