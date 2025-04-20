@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import math
-from sympy import symbols, diff, integrate, sympify, pi, sin, cos, tan, Symbol
+from sympy import symbols, diff, integrate, sympify, pi, sin, cos, tan
 
 
 # Page Configuration (This should be one of the first commands)
@@ -92,34 +92,40 @@ operation_type = st.selectbox("Choose operation", ["Derivative", "Indefinite Int
 variables = symbols(variables_input)
 expr = sympify(expression_input)
 
+# Derivative button
 if operation_type == "Derivative":
-    try:
-        var_to_diff = st.selectbox("Select variable to differentiate with respect to:", variables)
-        derivative_result = diff(expr, var_to_diff)
-        st.write(f"✅ Derivative of {expression_input} with respect to {var_to_diff}:")
-        st.latex(f"\frac{{d}}{{d{var_to_diff}}}({expression_input}) = {derivative_result}")
-    except Exception as e:
-        st.write(f"Error: {e}")
+    if st.button("Calculate Derivative"):
+        try:
+            var_to_diff = st.selectbox("Select variable to differentiate with respect to:", variables)
+            derivative_result = diff(expr, var_to_diff)
+            st.write(f"✅ Derivative of {expression_input} with respect to {var_to_diff}:")
+            st.latex(f"\frac{{d}}{{d{var_to_diff}}}({expression_input}) = {derivative_result}")
+        except Exception as e:
+            st.write(f"Error: {e}")
 
+# Indefinite Integral button
 elif operation_type == "Indefinite Integral":
-    try:
-        var_to_integrate = st.selectbox("Select variable to integrate with respect to:", variables)
-        integral_result = integrate(expr, var_to_integrate)
-        st.write(f"✅ Indefinite Integral of {expression_input} with respect to {var_to_integrate}:")
-        st.latex(f"∫ {expression_input} dx = {integral_result} + C")
-    except Exception as e:
-        st.write(f"Error: {e}")
+    if st.button("Calculate Indefinite Integral"):
+        try:
+            var_to_integrate = st.selectbox("Select variable to integrate with respect to:", variables)
+            integral_result = integrate(expr, var_to_integrate)
+            st.write(f"✅ Indefinite Integral of {expression_input} with respect to {var_to_integrate}:")
+            st.latex(f"∫ {expression_input} dx = {integral_result} + C")
+        except Exception as e:
+            st.write(f"Error: {e}")
 
+# Definite Integral button
 elif operation_type == "Definite Integral":
-    try:
-        var_to_integrate = st.selectbox("Select variable to integrate with respect to:", variables)
-        lower_limit = st.number_input(f"Enter lower limit for {var_to_integrate}:", value=0.0)
-        upper_limit = st.number_input(f"Enter upper limit for {var_to_integrate}:", value=1.0)
-        integral_result = integrate(expr, (var_to_integrate, lower_limit, upper_limit))
-        st.write(f"✅ Definite Integral of {expression_input} with respect to {var_to_integrate} from {lower_limit} to {upper_limit}:")
-        st.latex(f"∫_{{{lower_limit}}}^{{{upper_limit}}} ({expression_input}) d{var_to_integrate} = {integral_result}")
-    except Exception as e:
-        st.write(f"Error: {e}")
+    if st.button("Calculate Definite Integral"):
+        try:
+            var_to_integrate = st.selectbox("Select variable to integrate with respect to:", variables)
+            lower_limit = st.number_input(f"Enter lower limit for {var_to_integrate}:", value=0.0)
+            upper_limit = st.number_input(f"Enter upper limit for {var_to_integrate}:", value=1.0)
+            integral_result = integrate(expr, (var_to_integrate, lower_limit, upper_limit))
+            st.write(f"✅ Definite Integral of {expression_input} with respect to {var_to_integrate} from {lower_limit} to {upper_limit}:")
+            st.latex(f"∫_{{{lower_limit}}}^{{{upper_limit}}} ({expression_input}) d{var_to_integrate} = {integral_result}")
+        except Exception as e:
+            st.write(f"Error: {e}")
 
 # Footer
 st.markdown("<div class='footer'>Created with 💖 by Usama Sharif</div>", unsafe_allow_html=True)
