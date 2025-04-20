@@ -2,6 +2,16 @@ import streamlit as st
 import numpy as np
 import math
 from sympy import symbols, diff, integrate, sympify, pi, SympifyError, sin, cos, tan
+import os
+
+# safe css loader
+css_path = 'assets/style.css'
+if os.path.exists(css_path):
+    with open(css_path) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+else:
+    st.warning("⚠️ style.css not found in assets/ folder.")
+
 
 
 
