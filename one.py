@@ -8,6 +8,7 @@ from sympy import symbols, diff, integrate, sympify, pi, sin, cos, tan
 st.set_page_config(page_title="Scientific Calculator", layout="centered")
 
 # ✅ Inject Custom CSS (right after imports)
+
 st.markdown("""
     <style>
         body {
@@ -25,36 +26,36 @@ st.markdown("""
             border-radius: 6px;
             padding: 10px 18px;
             transition: 0.3s ease;
+            margin-top: 10px;
         }
         .stButton>button:hover {
             background-color: #2e7d32;  /* Darker green on hover */
         }
-        .stTextInput>div>input {
-            background-color: #ffffff;
-            border: 1px solid #ddd;  /* Light border for text inputs */
-            border-radius: 4px;
-            padding: 8px;
-            margin: 6px 0;
-        }
-        .stTextArea>div>textarea {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 8px;
-            margin: 6px 0;
-        }
+        .stTextInput>div>input,
+        .stTextArea>div>textarea,
+        .stNumberInput>div>input,
         .stSelectbox>div>div>input {
             background-color: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 8px;
-            margin: 6px 0;
+            border: 1px solid #ddd;  /* Light border for text inputs */
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            transition: border 0.3s ease;
         }
-        .footer {
-            margin-top: 50px;
-            color: #888;
-            text-align: center;
-            font-size: 13px;
+        .stTextInput>div>input:focus,
+        .stTextArea>div>textarea:focus,
+        .stNumberInput>div>input:focus,
+        .stSelectbox>div>div>input:focus {
+            border: 1px solid #2e86de;  /* Blue border on focus */
+            outline: none;
+        }
+        .stTextInput>div>input::placeholder,
+        .stTextArea>div>textarea::placeholder {
+            color: #bbb;  /* Placeholder text color */
+        }
+        .stTextInput, .stTextArea {
+            margin-top: 20px;
         }
         .stAlert {
             background-color: #f9c2c2;  /* Light red for alerts */
@@ -62,6 +63,39 @@ st.markdown("""
             color: #d40000;
             padding: 12px;
             border-radius: 4px;
+        }
+        .stMatrix, .stSelectbox {
+            margin-top: 20px;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+        .stMatrix > div, .stSelectbox > div {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .stMatrix button, .stSelectbox button {
+            margin: 5px;
+        }
+        .footer {
+            margin-top: 50px;
+            color: #888;
+            text-align: center;
+            font-size: 13px;
+        }
+        .result-box {
+            background-color: #e8f4f9;
+            border: 1px solid #2e86de;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        .result-box > div {
+            padding: 5px;
+            font-size: 16px;
         }
     </style>
 """, unsafe_allow_html=True)
