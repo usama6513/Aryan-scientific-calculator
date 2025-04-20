@@ -136,7 +136,7 @@ st.write(matrix_2)
 
 operation = st.selectbox("Select matrix operation", ["Add", "Multiply"])
 
-if st.button("Perform Matrix Operation"):
+if st.button("📐 Perform Matrix Operation"):
     try:
         result = np.add(matrix_1, matrix_2) if operation == "Add" else np.dot(matrix_1, matrix_2)
         st.success("✅ Matrix Result:")
@@ -156,7 +156,7 @@ try:
 
     if operation_type == "Derivative":
         var_to_diff = st.selectbox("Differentiate with respect to:", variables)
-        if st.button("Calculate Derivative"):
+        if st.button("💻 Calculate Derivative"):
             if var_to_diff in expr.free_symbols:
                 derivative_result = diff(expr, var_to_diff)
                 st.success("✅ Derivative:")
@@ -166,7 +166,7 @@ try:
 
     elif operation_type == "Indefinite Integral":
         var_to_integrate = st.selectbox("Integrate with respect to:", variables)
-        if st.button("Calculate Indefinite Integral"):
+        if st.button("🛰️ Calculate Indefinite Integral"):
             if var_to_integrate in expr.free_symbols:
                 integral_result = integrate(expr, var_to_integrate)
                 st.success("✅ Indefinite Integral:")
@@ -179,7 +179,7 @@ try:
         lower_limit_raw = st.text_input(f"Lower limit for {var_to_integrate} (e.g., 0, pi/2):", "0")
         upper_limit_raw = st.text_input(f"Upper limit for {var_to_integrate} (e.g., pi):", "pi")
 
-        if st.button("Calculate Definite Integral"):
+        if st.button("🤖 Calculate Definite Integral"):
             try:
                 lower_limit = sympify(lower_limit_raw)
                 upper_limit = sympify(upper_limit_raw)
