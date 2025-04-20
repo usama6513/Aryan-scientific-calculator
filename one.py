@@ -8,7 +8,7 @@ from sympy import symbols, diff, integrate, sympify, pi, sin, cos, tan
 st.set_page_config(page_title="Scientific Calculator", layout="centered")
 
 # ✅ Inject Custom CSS (right after imports)
-
+# Inject Custom CSS (right after imports)
 st.markdown("""
     <style>
         body {
@@ -20,8 +20,6 @@ st.markdown("""
             color: #2e86de;  /* Soft Blue color for headers */
             text-align: center;
         }
-
-        /* Button Style */
         .stButton>button {
             background-color: #4CAF50;  /* Green button */
             color: white;
@@ -29,15 +27,10 @@ st.markdown("""
             padding: 10px 18px;
             transition: 0.3s ease;
             margin-top: 10px;
-            font-size: 16px;
         }
         .stButton>button:hover {
             background-color: #2e7d32;  /* Darker green on hover */
-            font-size: 17px;
-            cursor: pointer;
         }
-
-        /* General Text Input, TextArea, Number Input */
         .stTextInput>div>input,
         .stTextArea>div>textarea,
         .stNumberInput>div>input,
@@ -61,39 +54,36 @@ st.markdown("""
         .stTextArea>div>textarea::placeholder {
             color: #bbb;  /* Placeholder text color */
         }
-        
-        /* Margin and Padding Adjustments for Inputs and Results */
-        .stTextInput, .stTextArea, .stSelectbox {
+        .stTextInput, .stTextArea {
             margin-top: 20px;
         }
-
-        /* Matrix Section - Stylish Boxes for Matrix 1 & 2 */
-        .stMatrix {
+        .stAlert {
+            background-color: #f9c2c2;  /* Light red for alerts */
+            border: 1px solid #f2a1a1;
+            color: #d40000;
+            padding: 12px;
+            border-radius: 4px;
+        }
+        .stMatrix, .stSelectbox {
             margin-top: 20px;
             background-color: #ffffff;
             padding: 15px;
             border-radius: 10px;
             border: 1px solid #ddd;
         }
-        .stMatrix > div {
-            font-size: 16px;
+        .stMatrix > div, .stSelectbox > div {
+            font-size: 14px;
             margin-bottom: 10px;
         }
-        .stMatrix button {
+        .stMatrix button, .stSelectbox button {
             margin: 5px;
-            padding: 8px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 6px;
-            transition: 0.3s ease;
         }
-        .stMatrix button:hover {
-            background-color: #2e7d32;  /* Darker green on hover */
-            font-size: 17px;
-            cursor: pointer;
+        .footer {
+            margin-top: 50px;
+            color: #888;
+            text-align: center;
+            font-size: 13px;
         }
-        
-        /* Results Box Styling */
         .result-box {
             background-color: #e8f4f9;
             border: 1px solid #2e86de;
@@ -107,25 +97,9 @@ st.markdown("""
             padding: 5px;
             font-size: 16px;
         }
-        
-        /* Alert Box Style */
-        .stAlert {
-            background-color: #f9c2c2;  /* Light red for alerts */
-            border: 1px solid #f2a1a1;
-            color: #d40000;
-            padding: 12px;
-            border-radius: 4px;
-        }
-
-        /* Footer Styling */
-        .footer {
-            margin-top: 50px;
-            color: #888;
-            text-align: center;
-            font-size: 13px;
-        }
     </style>
 """, unsafe_allow_html=True)
+
 
 # Title
 st.title("🧮 Scientific Calculator")
