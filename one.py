@@ -179,17 +179,21 @@ elif operation_type == "Indefinite Integral":
             st.write(f"Error: {e}")
 
 # Definite Integral button
-elif operation_type == "Definite Integral":
-    if st.button("Calculate Definite Integral"):
-        try:
-            var_to_integrate = st.selectbox("Select variable to integrate with respect to:", variables)
-            lower_limit = st.number_input(f"Enter lower limit for {var_to_integrate}:", value=0.0)
-            upper_limit = st.number_input(f"Enter upper limit for {var_to_integrate}:", value=1.0)
-            integral_result = integrate(expr, (var_to_integrate, lower_limit, upper_limit))
-            st.write(f"✅ Definite Integral of {expression_input} with respect to {var_to_integrate} from {lower_limit} to {upper_limit}:")
-            st.latex(f"∫_{{{lower_limit}}}^{{{upper_limit}}} ({expression_input}) d{var_to_integrate} = {integral_result}")
-        except Exception as e:
-            st.write(f"Error: {e}")
+from sympy import pi  # make sure pi is imported
+
+lower_limit_str = st.text_input(f"Enter lower limit for {var_to_integrate} (e.g. 0, pi/2):", value="0")
+upper_limit_str = st.text_input(f"Enter upper limit for {var_to_integrate} (e.g. pi, 2*pi):", value="pi")
+
+try:
+    lower_limit = sympify(lower_limit_str)
+    upper_limit = sympify(upper_limit_str)
+
+    if st.button("Compute Definite Integral"):
+        integral_result = integrate(expr, (var_to_integrate, lower_limit, upper_limit))
+        st.markdown(f"<div class='result-box'>✅ Definite Integral of <b>{expression_input}</b> from <b>{lower_limit}</b> to <b>{upper_limit}</b> w.r.t <b>{var_to_integrate}</b>:<br><br><b>{integral_result}</b></div>", unsafe_allow_html=True)
+except Exception as e:
+    st.error(f"⚠️ Invalid input: {e}")
+
 
 # Footer
 st.markdown("<div class='footer'>Created with 💖 by Usama Sharif</div>", unsafe_allow_html=True)
