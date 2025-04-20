@@ -8,6 +8,7 @@ from sympy import symbols, diff, integrate, sympify, pi, sin, cos, tan
 st.set_page_config(page_title="Scientific Calculator", layout="centered")
 
 # ✅ Inject Custom CSS (right after imports)
+
 st.markdown("""
     <style>
         body {
@@ -125,7 +126,9 @@ st.markdown("""
             font-size: 13px;
         }
     </style>
-""", unsafe_allow_html=True
+""", unsafe_allow_html=True)
+
+
             
 # Title
 st.title("🧮 Scientific Calculator")
