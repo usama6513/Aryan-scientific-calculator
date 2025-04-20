@@ -89,22 +89,34 @@ except Exception as e:
 if operation_type == "Derivative":
     var_to_diff = st.selectbox("Differentiate with respect to:", variables)
     if st.button("Calculate Derivative"):
-        derivative_result = diff(expr, var_to_diff)
-        st.latex(f"\\frac{{d}}{{d{var_to_diff}}}({expression_input}) = {derivative_result}")
+        if var_to_diff in expr.free_symbols:
+            derivative_result = diff(expr, var_to_diff)
+            st.latex(f"\\frac{{d}}{{d{var_to_diff}}}({expression_input}) = {derivative_result}")
+        else:
+            st.warning(f"⚠️ Variable `{var_to_diff}` is not found in expression `{expression_input}`.")
+
 
 elif operation_type == "Indefinite Integral":
     var_to_integrate = st.selectbox("Integrate with respect to:", variables)
     if st.button("Calculate Indefinite Integral"):
-        integral_result = integrate(expr, var_to_integrate)
-        st.latex(f"\\int {expression_input} \\, d{var_to_integrate} = {integral_result} + C")
+        if var_to_integrate in expr.free_symbols:
+            integral_result = integrate(expr, var_to_integrate)
+            st.latex(f"\\int {expression_input} \\, d{var_to_integrate} = {integral_result} + C")
+        else:
+            st.warning(f"⚠️ Variable `{var_to_integrate}` is not found in expression `{expression_input}`.")
+
 
 elif operation_type == "Definite Integral":
-    var_to_integrate = st.selectbox("Integrate from a to b with respect to:", variables)
-    lower_limit = st.number_input(f"Lower limit for {var_to_integrate}:", value=0.0)
-    upper_limit = st.number_input(f"Upper limit for {var_to_integrate}:", value=1.0)
+    var_to_integrate = st.selectbox("Select variable to integrate with respect to:", variables)
+    lower_limit = st.number_input(f"Enter lower limit for {var_to_integrate}:", value=0.0)
+    upper_limit = st.number_input(f"Enter upper limit for {var_to_integrate}:", value=1.0)
     if st.button("Calculate Definite Integral"):
-        definite_result = integrate(expr, (var_to_integrate, lower_limit, upper_limit))
-        st.latex(f"\\int_{{{lower_limit}}}^{{{upper_limit}}} {expression_input} \\, d{var_to_integrate} = {definite_result}")
+        if var_to_integrate in expr.free_symbols:
+            definite_result = integrate(expr, (var_to_integrate, lower_limit, upper_limit))
+            st.latex(f"\\int_{{{lower_limit}}}^{{{upper_limit}}} {expression_input} \\, d{var_to_integrate} = {definite_result}")
+        else:
+            st.warning(f"⚠️ Variable `{var_to_integrate}` is not found in expression `{expression_input}`.")
+
 
 # ----------------------------------
 # Footer
