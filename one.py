@@ -3,9 +3,7 @@ import numpy as np
 import math
 from sympy import symbols, diff, integrate, sympify, pi, SympifyError, sin, cos, tan
 
-# Load Custom CSS
-with open('assets/style.css') as f:
-    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
 
 # Page config (must be first)
 st.set_page_config(page_title="Scientific Calculator", layout="centered")
