@@ -108,7 +108,7 @@ st.title("🧮 Scientific Calculator")
 # ---------------- TRIGONOMETRIC FUNCTIONS ----------------
 # Trigonometric Functions
 
- st.subheader("📐 Trigonometric Functions")
+st.subheader("📐 Trigonometric Functions")
 shift = st.checkbox("Shift (Inverse Functions)")
 angle_input = st.number_input("Enter angle in degrees:", value=0.0)
 
