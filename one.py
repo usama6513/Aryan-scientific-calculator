@@ -115,6 +115,7 @@ angle_input = st.number_input("Enter angle in degrees:", value=0.0)
 angle_rad = math.radians(angle_input)
 
 if shift:
+    if st.button("🧠 Compute Inverse Trig Values"):
     try:
         st.write(f"arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
         st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
