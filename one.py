@@ -3,6 +3,10 @@ import numpy as np
 import math
 from sympy import symbols, diff, integrate, sympify, factor, pi, sin, cos, tan
 from sympy.core.sympify import SympifyError
+
+# --- Page Config ---
+
+st.set_page_config(page_title="Scientific Calculator", layout="centered")
 st.markdown("""
     <style>
     div.stButton > button:first-child {
@@ -22,8 +26,8 @@ st.title("Matrix Button with Green Style")
 
 if st.button("Click Me"):
     st.success("You clicked the green button! 🍀")
-# --- Page Config ---
-st.set_page_config(page_title="Scientific Calculator", layout="centered")
+
+
 
 # --- Custom Trigonometric Functions ---
 def cot(x): return 1 / math.tan(x)
