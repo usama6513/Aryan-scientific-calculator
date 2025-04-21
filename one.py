@@ -43,8 +43,6 @@ if st.button("💾 Compute Trigonometric Values"):
         st.error(f"⚠️ Error: {e}")
 
 # ------------------ Matrix Operations ------------------
-import streamlit as st
-import numpy as np
 
 st.title("Matrix Input App (Flexible Size)")
 
