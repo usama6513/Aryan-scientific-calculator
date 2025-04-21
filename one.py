@@ -121,6 +121,7 @@ if shift:
         st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
         st.write(f"arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
         st.error("❌ Invalid input for inverse functions.")
+    except Exception as e:
 else:
     st.write(f"sin({angle_input}°) = {math.sin(angle_rad):.4f}")
     st.write(f"cos({angle_input}°) = {math.cos(angle_rad):.4f}")
