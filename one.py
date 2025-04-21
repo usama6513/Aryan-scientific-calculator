@@ -108,90 +108,23 @@ st.title("🧮 Scientific Calculator")
 # ---------------- TRIGONOMETRIC FUNCTIONS ----------------
 # Trigonometric Functions
 
-st.subheader("🧮 Trigonometric Functions")
-
-shift = st.checkbox("Shift (Inverse Functions)")  # Option for Inverse Functions
+ st.subheader("📐 Trigonometric Functions")
+shift = st.checkbox("Shift (Inverse Functions)")
 angle_input = st.number_input("Enter angle in degrees:", value=0.0)
 
-angle_rad = math.radians(angle_input)  # Convert degree to radians
+angle_rad = math.radians(angle_input)
 
-# If Shift (Inverse) is selected
 if shift:
-    if st.button("🧠 Compute Inverse Trigonometric Values"):
-        try:
-            st.markdown = f"""
-                <div style='
-                    background-color: #172a45;
-                    border-left: 5px solid #1abc9c;
-                    padding: 15px;
-                    border-radius: 8px;
-                    font-size: 17px;
-                    margin-top: 20px;
-                    color: green;
-                '>
-                    arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°<br>
-                    arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°<br>
-                    arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°
-                </div>
-            """
-            st.markdown(result_html, unsafe_allow_html=True)
-        except ValueError:
-            st.error("⚠️ Invalid input for inverse trigonometric functions.")
+    try:
+        st.write(f"arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
+        st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
+        st.write(f"arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
+    except ValueError:
+        st.error("❌ Invalid input for inverse functions.")
 else:
-    # If Shift is not selected, calculate the regular trigonometric values
-    if st.button("🧠 Compute Trigonometric Values"):
-        result_html = f"""
-            <div style='
-                background-color: #172a45;
-                border-left: 5px solid #1abc9c;
-                padding: 15px;
-                border-radius: 8px;
-                font-size: 17px;
-                margin-top: 20px;
-                color: green;
-            '>
-                sin({angle_input}°) = {math.sin(angle_rad):.4f}<br>
-                cos({angle_input}°) = {math.cos(angle_rad):.4f}<br>
-                tan({angle_input}°) = {math.tan(angle_rad):.4f}
-            </div>
-        """
-        st
-            st.markdown(result_html, unsafe_allow_html=True)
-      
-            st.error("⚠️ Invalid input for inverse trigonometric functions.")
-else:
-    if st.button("🧠 Compute Trigonometric Values"):
-        result_html = f"""
-            <div style='
-                background-color: #172a45;
-                border-left: 5px solid #1abc9c;
-                padding: 15px;
-                border-radius: 8px;
-                font-size: 17px;
-                margin-top: 20px;
-                color: green;
-            '>
-                sin({angle_input}°) = {math.sin(angle_rad):.4f}<br>
-                cos({angle_input}°) = {math.cos(angle_rad):.4f}<br>
-                tan({angle_input}°) = {math.tan(angle_rad):.4f}
-            </div>
-        """
-        st.markdown(result_html, unsafe_allow_html=True)
-
-
-
-
-        except ValueError:
-            st.error("Invalid input for inverse trigonometric functions.")
-    else:
-        st.markdown(f"""
-        <div class='result-box'>
-            sin({angle_input}°) = {math.sin(angle_rad):.4f}<br>
-            cos({angle_input}°) = {math.cos(angle_rad):.4f}<br>
-            tan({angle_input}°) = {math.tan(angle_rad):.4f}
-        </div>
-        """, unsafe_allow_html=True)
-
+    st.write(f"sin({angle_input}°) = {math.sin(angle_rad):.4f}")
+    st.write(f"cos({angle_input}°) = {math.cos(angle_rad):.4f}")
+    st.write(f"tan({angle_input}°) = {math.tan(angle_rad):.4f}")
 
 # ---------------- MATRIX OPERATIONS ----------------
 st.subheader("🔢 Matrix Operations")
@@ -205,7 +138,7 @@ st.write(matrix_2)
 
 operation = st.selectbox("Select matrix operation", ["Add", "Multiply"])
 
-if st.button("📐 Perform Matrix Operation"):
+if st.button("Perform Matrix Operation"):
     try:
         result = np.add(matrix_1, matrix_2) if operation == "Add" else np.dot(matrix_1, matrix_2)
         st.success("✅ Matrix Result:")
@@ -225,7 +158,7 @@ try:
 
     if operation_type == "Derivative":
         var_to_diff = st.selectbox("Differentiate with respect to:", variables)
-        if st.button("💻 Calculate Derivative"):
+        if st.button("Calculate Derivative"):
             if var_to_diff in expr.free_symbols:
                 derivative_result = diff(expr, var_to_diff)
                 st.success("✅ Derivative:")
@@ -235,7 +168,7 @@ try:
 
     elif operation_type == "Indefinite Integral":
         var_to_integrate = st.selectbox("Integrate with respect to:", variables)
-        if st.button("🛰️ Calculate Indefinite Integral"):
+        if st.button("Calculate Indefinite Integral"):
             if var_to_integrate in expr.free_symbols:
                 integral_result = integrate(expr, var_to_integrate)
                 st.success("✅ Indefinite Integral:")
@@ -248,7 +181,7 @@ try:
         lower_limit_raw = st.text_input(f"Lower limit for {var_to_integrate} (e.g., 0, pi/2):", "0")
         upper_limit_raw = st.text_input(f"Upper limit for {var_to_integrate} (e.g., pi):", "pi")
 
-        if st.button("🤖 Calculate Definite Integral"):
+        if st.button("Calculate Definite Integral"):
             try:
                 lower_limit = sympify(lower_limit_raw)
                 upper_limit = sympify(upper_limit_raw)
