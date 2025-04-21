@@ -1,176 +1,168 @@
 import streamlit as st
-from sympy import sympify, pi, N, sin, cos, tan, cot, sec, csc, asin, acos, atan, acot, asec, acsc, diff, symbols, integrate, factor, Matrix
-
+import numpy as np
 import math
+from sympy import symbols, diff, integrate, sympify, factor, pi, sin, cos, tan
+from sympy.core.sympify import SympifyError
 
-# Set page config
-st.set_page_config(page_title="Advanced Calculator", page_icon="📐", layout="wide")
-st.title("🧠 Advanced Calculator ")
+# --- Page Config ---
 
-# Add Custom Styles for a Stylish UI
+st.set_page_config(page_title="Scientific Calculator", layout="centered")
 st.markdown("""
     <style>
-        .title {
-            font-size: 36px;
-            color: #4CAF50;
-        }
-        .stRadio>label {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .stTextInput>label {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .stButton>button {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-        }
-        .stTextArea>label {
-            font-size: 20px;
-        }
-        .answer_button {
-            background-color: #008CBA;
-            color: white;
-            padding: 10px 15px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-        }
+    div.stButton > button:first-child {
+        background-color: #28a745;
+        color: white;
+        border: None;
+        padding: 0.5em 1em;
+    }
+    div.stButton > button:first-child:hover {
+        background-color: #218838;
+        color: white;
+    }
     </style>
 """, unsafe_allow_html=True)
 
-# Angle Unit Selection (Radians / Degrees)
-unit = st.radio("Select angle unit", ["Radians", "Degrees"], horizontal=True)
+st.title("Matrix Button with Green Style")
 
-# Input Type Selection (Decimal / π-form)
-mode = st.radio("Input mode", ["Decimal", "π-form"], horizontal=True)
+if st.button("Click Me"):
+    st.success("You clicked the green button! 🍀")
 
-# Handle input (Decimal or π-form)
-if mode == "Decimal":
-    angle = st.number_input("Enter angle", value=0.0, format="%.4f")
-    if unit == "Degrees":
-        angle_rad = math.radians(angle)
-    else:
-        angle_rad = angle
-    angle_sym = angle_rad  # for compatibility
 
-else:
-    expr = st.text_input("Enter angle in π-form (e.g. pi/3, 3*pi/4)", value="pi/2")
+
+# --- Custom Trigonometric Functions ---
+def cot(x): return 1 / math.tan(x)
+def sec(x): return 1 / math.cos(x)
+def cosec(x): return 1 / math.sin(x)
+def arccot(x): return math.atan(1/x)
+def arcsec(x): return math.acos(1/x)
+def arccosec(x): return math.asin(1/x)
+
+# --- Title ---
+st.title("🧮 Scientific Calculator")
+
+# ------------------ Trigonometric Functions ------------------
+st.subheader("📐 Trigonometric Functions")
+angle = st.number_input("Enter angle (in degrees):", value=0.0)
+shift = st.checkbox("Use Inverse Functions")
+if st.button("💾 Compute Trigonometric Values"):
+    angle_rad = math.radians(angle)
     try:
-        angle_sym = sympify(expr)
-        if unit == "Degrees":
-            angle_sym = N(angle_sym * 180 / pi)  # convert to degrees
-            angle_rad = math.radians(angle_sym)
+        if shift:
+            st.write(f"arcsin(sin({angle}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
+            st.write(f"arccos(cos({angle}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
+            st.write(f"arctan(tan({angle}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
+            st.write(f"arccot(cot({angle}°)) = {math.degrees(arccot(cot(angle_rad))):.4f}°")
+            st.write(f"arcsec(sec({angle}°)) = {math.degrees(arcsec(sec(angle_rad))):.4f}°")
+            st.write(f"arccosec(cosec({angle}°)) = {math.degrees(arccosec(cosec(angle_rad))):.4f}°")
         else:
-            angle_rad = N(angle_sym)
+            st.write(f"sin({angle}°) = {math.sin(angle_rad):.4f}")
+            st.write(f"cos({angle}°) = {math.cos(angle_rad):.4f}")
+            st.write(f"tan({angle}°) = {math.tan(angle_rad):.4f}")
+            st.write(f"cot({angle}°) = {cot(angle_rad):.4f}")
+            st.write(f"sec({angle}°) = {sec(angle_rad):.4f}")
+            st.write(f"cosec({angle}°) = {cosec(angle_rad):.4f}")
     except Exception as e:
-        st.error(f"Invalid input: {e}")
-        st.stop()
+        st.error(f"⚠ Error: {e}")
 
-# Trigonometric Calculations
-st.subheader("📊 Trigonometric Values")
+# ------------------ Matrix Operations ------------------
+
+st.title("Matrix Input App (Flexible Size)")
+
+# Matrix size selection
+st.sidebar.header("Matrix Size Selector")
+rows = st.sidebar.selectbox("Select number of rows", [2, 3, 4])
+cols = st.sidebar.selectbox("Select number of columns", [2, 3, 4])
+
+st.subheader(f"Enter values for Matrix 1 ({rows}x{cols})")
+matrix_1 = []
+for i in range(rows):
+    row = []
+    for j in range(cols):
+        val = st.number_input(f"Matrix 1 [{i+1}][{j+1}]", key=f"m1_{i}_{j}", format="%.2f")
+        row.append(val)
+    matrix_1.append(row)
+matrix_1 = np.array(matrix_1)
+st.write("Matrix 1:")
+st.write(matrix_1)
+
+st.subheader(f"Enter values for Matrix 2 ({rows}x{cols})")
+matrix_2 = []
+for i in range(rows):
+    row = []
+    for j in range(cols):
+        val = st.number_input(f"Matrix 2 [{i+1}][{j+1}]", key=f"m2_{i}_{j}", format="%.2f")
+        row.append(val)
+    matrix_2.append(row)
+matrix_2 = np.array(matrix_2)
+st.write("Matrix 2:")
+st.write(matrix_2)
+
+# Optional: Add operations
+st.subheader("Matrix Operations")
+operation = st.selectbox("Choose operation", ["Add", "Subtract", "Multiply Element-wise"])
+
+if st.button("Calculate"):
+    if operation == "Add":
+        result = matrix_1 + matrix_2
+    elif operation == "Subtract":
+        result = matrix_1 - matrix_2
+    elif operation == "Multiply Element-wise":
+        result = matrix_1 * matrix_2
+    else:
+        result = "Invalid operation"
+    
+    st.success(f"Result of {operation}:")
+    st.write(result)
+
+   
+          
+# ------------------ Calculus & Algebra ------------------
+st.subheader("🧠 Calculus & Algebra")
+
+expression = st.text_input("Enter expression (e.g. x^2 + 2*x + 1):", "x^2 + 2*x + 1")
+variable_input = st.text_input("Enter variable(s) (comma-separated if more):", "x")
+calc_option = st.selectbox("Choose operation:", ["Derivative", "Indefinite Integral", "Definite Integral", "Factor"])
+
 try:
-    st.write(f"✅ Angle in radians (decimal): `{angle_rad:.4f}`")
+    vars = symbols(variable_input)
+    expr = sympify(expression)
 
-    st.markdown(f"""
-    | Function        | Value              |
-    |-----------------|--------------------|
-    | sin(θ)          | {round(math.sin(angle_rad), 6)} |
-    | cos(θ)          | {round(math.cos(angle_rad), 6)} |
-    | tan(θ)          | {round(math.tan(angle_rad), 6)} |
-    | cot(θ)          | {round(1/math.tan(angle_rad), 6) if math.tan(angle_rad) != 0 else "∞"} |
-    | sec(θ)          | {round(1/math.cos(angle_rad), 6) if math.cos(angle_rad) != 0 else "∞"} |
-    | csc(θ)          | {round(1/math.sin(angle_rad), 6) if math.sin(angle_rad) != 0 else "∞"} |
-    | arcsin(θ)       | {round(N(asin(angle_rad)), 6) if -1 <= angle_rad <= 1 else "Undefined"} |
-    | arccos(θ)       | {round(N(acos(angle_rad)), 6) if -1 <= angle_rad <= 1 else "Undefined"} |
-    | arctan(θ)       | {round(N(atan(angle_rad)), 6)} |
-    | arccot(θ)       | {round(N(acot(angle_rad)), 6)} |
-    | arcsec(θ)       | {round(N(asec(angle_rad)), 6) if abs(angle_rad) >= 1 else "Undefined"} |
-    | arccsc(θ)       | {round(N(acsc(angle_rad)), 6) if abs(angle_rad) >= 1 else "Undefined"} |
-    """, unsafe_allow_html=True)
+    if calc_option == "Derivative":
+        var = st.selectbox("Differentiate with respect to:", vars)
+        if st.button("🦾 Compute Derivative"):
+            result = diff(expr, var)
+            st.success("✅ Derivative:")
+            st.latex(f"\\frac{{d}}{{d{var}}}({expression}) = {result}")
 
+    elif calc_option == "Indefinite Integral":
+        var = st.selectbox("Integrate with respect to:", vars)
+        if st.button("💻 Compute Indefinite Integral"):
+            result = integrate(expr, var)
+            st.success("✅ Indefinite Integral:")
+            st.latex(f"\\int {expression} \\, d{var} = {result} + C")
+
+    elif calc_option == "Definite Integral":
+        var = st.selectbox("Integrate from lower to upper limit (with respect to):", vars)
+        lower = st.text_input("Lower Limit:", "0")
+        upper = st.text_input("Upper Limit:", "pi")
+        if st.button("🤖 Compute Definite Integral"):
+            lower_val = sympify(lower)
+            upper_val = sympify(upper)
+            result = integrate(expr, (var, lower_val, upper_val))
+            st.success("✅ Definite Integral:")
+            st.latex(f"\\int_{{{lower}}}^{{{upper}}} {expression} \\, d{var} = {result}")
+
+    elif calc_option == "Factor":
+        if st.button("🧩 Factor Expression"):
+            result = factor(expr)
+            st.success("✅ Factorized Form:")
+            st.latex(f"{expression} = {result}")
+
+except SympifyError as e:
+    st.error(f"❌ Invalid Expression: {e}")
 except Exception as e:
-    st.error(f"Math error: {e}")
+    st.error(f"⚠ Error: {e}")
 
-# Derivative Section
-st.subheader("🔢 Derivative Calculator")
-x = symbols('x')  # x is the variable for derivatives
-func_input = st.text_input("Enter a function to differentiate (e.g. x**2, sin(x), cos(x))", value="x**2")
-
-if func_input:
-    try:
-        func_expr = sympify(func_input)  # Convert to sympy expression
-        derivative = diff(func_expr, x)  # Take the derivative
-        st.write(f"Function: {func_expr}")
-        st.write(f"Derivative: {derivative}")
-        
-        # If the user asks for the evaluated value at the angle, evaluate the derivative
-        if angle_sym:
-            derivative_value = derivative.evalf(subs={x: angle_rad})
-            st.write(f"Derivative at angle ({angle_rad:.4f}): {derivative_value:.4f}")
-        
-    except Exception as e:
-        st.error(f"Invalid function for derivative: {e}")
-
-# Factorization Section
-st.subheader("🔠 Factorization of Polynomials")
-
-polynomial_input = st.text_input("Enter polynomial (e.g. x**2 - 4, x**2 + 5*x + 6)", value="x**2 - 4")
-
-if polynomial_input:
-    try:
-        poly_expr = sympify(polynomial_input)
-        factorized = factor(poly_expr)
-        st.write(f"Polynomial: {poly_expr}")
-        st.write(f"Factorized Form: {factorized}")
-    except Exception as e:
-        st.error(f"Invalid polynomial input: {e}")
-
-# Matrix Operations
-st.subheader("🧮 Matrix Operations")
-matrix_input = st.text_area("Enter Matrix (comma-separated rows, e.g. [[1, 2], [3, 4]])", value="[[1, 2], [3, 4]]")
-
-if matrix_input:
-    try:
-        matrix_expr = sympify(matrix_input)
-        matrix_obj = Matrix(matrix_expr)
-
-        determinant = matrix_obj.det()
-        inverse = matrix_obj.inv() if matrix_obj.det() != 0 else "Inverse not possible"
-        
-        st.write(f"Matrix: {matrix_obj}")
-        st.write(f"Determinant: {determinant}")
-        st.write(f"Inverse: {inverse}")
-        
-    except Exception as e:
-        st.error(f"Invalid matrix input: {e}")
-
-# Integral Section
-st.subheader("🔗 Integral Calculator")
-integral_input = st.text_input("Enter function to integrate (e.g. x**2, sin(x))", value="x**2")
-lower_limit = st.number_input("Enter lower limit for definite integral", value=0.0)
-upper_limit = st.number_input("Enter upper limit for definite integral", value=1.0)
-
-if integral_input:
-    try:
-        func_expr = sympify(integral_input)  # Convert to sympy expression
-        indefinite_integral = integrate(func_expr, x)  # Calculate indefinite integral
-        
-        # Calculate definite integral
-        definite_integral = integrate(func_expr, (x, lower_limit, upper_limit))
-        
-        # Display the results
-        st.write(f"Function: {func_expr}")
-        st.write(f"Indefinite Integral: {indefinite_integral}")
-        
-        st.write(f"Definite Integral from {lower_limit} to {upper_limit}: {definite_integral}")
-        
-        # Add Answer Buttons
-        st.markdown(f"<button class='answer_button'>{definite_integral}</button>", unsafe_allow_html=True)
-        st.markdown(f"<button class='answer_button'>{indefinite_integral}</button>", unsafe_allow_html=True)
-        
-    except Exception as e:
-        st.error(f"Invalid function for integral: {e}")
+# ------------------ Footer ------------------
+st.markdown("<hr>", unsafe_allow_html=True)
+st.markdown("<div style='text-align: center; color: grey;'>Created with 💖 by Usama Sharif</div>", unsafe_allow_html=True)
