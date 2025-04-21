@@ -115,11 +115,14 @@ angle_input = st.number_input("Enter angle in degrees:", value=0.0)
 angle_rad = math.radians(angle_input)
 
 if shift:
-    
+        st.button("💾 Compute the trigonametric values")
     try:
         st.write(f"arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
         st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
         st.write(f"arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
+        st.write(f"arccot(cot({angle_input}°)) = {math.degrees(math.acot(math.cot(angle_rad))):.4f}°")
+        st.write(f"arcsec(sec({angle_input}°)) = {math.degrees(math.asec(math.sec(angle_rad))):.4f}°")
+        st.write(f"arccosec(cosec({angle_input}°)) = {math.degrees(math.acosec(math.cosec(angle_rad))):.4f}°")
     except ValueError:
         st.error("❌ Invalid input for inverse functions.")
    
@@ -127,7 +130,10 @@ else:
     st.write(f"sin({angle_input}°) = {math.sin(angle_rad):.4f}")
     st.write(f"cos({angle_input}°) = {math.cos(angle_rad):.4f}")
     st.write(f"tan({angle_input}°) = {math.tan(angle_rad):.4f}")
-
+    st.write(f"cot({angle_input}°) = {math.cot(angle_rad):.4f}")
+    st.write(f"sec({angle_input}°) = {math.sec(angle_rad):.4f}")
+    st.write(f"cosec({angle_input}°) = {math.cosec(angle_rad):.4f}")
+   
 # ---------------- MATRIX OPERATIONS ----------------
 st.subheader("🔢 Matrix Operations")
 matrix_1 = np.array([[1, 2], [3, 4]])
@@ -138,11 +144,15 @@ st.write(matrix_1)
 st.write("Matrix 2:")
 st.write(matrix_2)
 
-operation = st.selectbox("Select matrix operation", ["Add","Sub","Divide","Determinent", "Multiply"])
+operation = st.selectbox("Select matrix operation", ["Add","Sub","Divide","Determinent","Inverse", "Multiply"])
 
 if st.button("💾 Perform Matrix Operation"):
     try:
         result = np.add(matrix_1, matrix_2) if operation == "Add" else np.dot(matrix_1, matrix_2)
+        result = np.sub(matrix_1, matrix_2) if operation == "Sub" else np.dot(matrix_1, matrix_2)
+        result = np.div(matrix_1, matrix_2) if operation == "Div" else np.dot(matrix_1, matrix_2)
+        result = np.det(matrix_1, matrix_2) if operation == "Det" else np.dot(matrix_1, matrix_2) 
+        result = np.inv(matrix_1, matrix_2) if operation == "Inv" else np.dot(matrix_1, matrix_2) 
         st.success("✅ Matrix Result:")
         st.write(result)
     except Exception as e:
