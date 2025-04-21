@@ -82,7 +82,7 @@ if st.button("💾 Compute Trigonometric Values"):
            st.write(f"cot({angle_input}°) = {cot(angle_rad):.4f}")
            st.write(f"sec({angle_input}°) = {sec(angle_rad):.4f}")
            st.write(f"cosec({angle_input}°) = {cosec(angle_rad):.4f}")
-   except Exception as e:
+    except Exception as e:
         st.error(f"Error: {e}")
 
 # ---------------- Matrix Operations ----------------
