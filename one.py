@@ -193,7 +193,7 @@ try:
                 else:
                     st.warning("Variable not found in expression. Result = 0.")
             except SympifyError:
-                st.error("❌ Invalid limit. Use 0, pi, pi/2, etc.")
+                st.error("❌ Invalid limit. Use 0,3pi/2, pi, pi/2,2pi,5pi/2,3pi,7pi/2 etc.")
 except SympifyError as e:
     st.error(f"Invalid Expression: {e}")
 
