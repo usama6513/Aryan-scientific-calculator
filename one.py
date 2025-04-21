@@ -120,7 +120,7 @@ if shift:
         st.write(f"arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
         st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
         st.write(f"arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
-        except ValueError:
+    except ValueError:
         st.error("❌ Invalid input for inverse functions.")
 else:
     st.write(f"sin({angle_input}°) = {math.sin(angle_rad):.4f}")
@@ -179,7 +179,7 @@ try:
 
     elif operation_type == "Definite Integral":
         var_to_integrate = st.selectbox("Variable for definite integral:", variables)
-        lower_limit_raw = st.text_input(f"Lower limit for {var_to_integrate} (e.g., 0,pi/2):", "0")
+        lower_limit_raw = st.text_input(f"Lower limit for {var_to_integrate} (e.g., 0,pi):", "0")
         upper_limit_raw = st.text_input(f"Upper limit for {var_to_integrate} (e.g., pi):", "pi")
 
         if st.button("Calculate Definite Integral"):
