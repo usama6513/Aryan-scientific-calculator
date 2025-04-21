@@ -43,36 +43,59 @@ if st.button("💾 Compute Trigonometric Values"):
         st.error(f"⚠️ Error: {e}")
 
 # ------------------ Matrix Operations ------------------
-st.subheader("🔢 Matrix Operations")
-matrix_1 = np.array([[1, 2], [3, 4]])
-matrix_2 = np.array([[5, 6], [7, 8]])
+import streamlit as st
+import numpy as np
 
-st.write("Matrix A:")
+st.title("Matrix Input App (Flexible Size)")
+
+# Matrix size selection
+st.sidebar.header("Matrix Size Selector")
+rows = st.sidebar.selectbox("Select number of rows", [2, 3, 4])
+cols = st.sidebar.selectbox("Select number of columns", [2, 3, 4])
+
+st.subheader(f"Enter values for Matrix 1 ({rows}x{cols})")
+matrix_1 = []
+for i in range(rows):
+    row = []
+    for j in range(cols):
+        val = st.number_input(f"Matrix 1 [{i+1}][{j+1}]", key=f"m1_{i}_{j}", format="%.2f")
+        row.append(val)
+    matrix_1.append(row)
+matrix_1 = np.array(matrix_1)
+st.write("Matrix 1:")
 st.write(matrix_1)
-st.write("Matrix B:")
+
+st.subheader(f"Enter values for Matrix 2 ({rows}x{cols})")
+matrix_2 = []
+for i in range(rows):
+    row = []
+    for j in range(cols):
+        val = st.number_input(f"Matrix 2 [{i+1}][{j+1}]", key=f"m2_{i}_{j}", format="%.2f")
+        row.append(val)
+    matrix_2.append(row)
+matrix_2 = np.array(matrix_2)
+st.write("Matrix 2:")
 st.write(matrix_2)
 
-matrix_op = st.selectbox("Choose matrix operation:", ["Add", "Subtract", "Multiply", "Inverse of A", "Determinant of A"])
+# Optional: Add operations
+st.subheader("Matrix Operations")
+operation = st.selectbox("Choose operation", ["Add", "Subtract", "Multiply Element-wise"])
 
-if st.button("💾 Compute Matrix Operation"):
-    try:
-        if matrix_op == "Add":
-            result = np.add(matrix_1, matrix_2)
-        elif matrix_op == "Subtract":
-            result = np.subtract(matrix_1, matrix_2)
-        elif matrix_op == "Multiply":
-            result = np.dot(matrix_1, matrix_2)
-        elif matrix_op == "Inverse of A":
-            result = np.linalg.inv(matrix_1)
-        elif matrix_op == "Determinant of A":
-            result = np.linalg.det(matrix_1)
-        else:
-            result = "Unknown operation"
-        st.success("✅ Result:")
-        st.write(result)
-    except Exception as e:
-        st.error(f"⚠️ Matrix error: {e}")
+if st.button("Calculate"):
+    if operation == "Add":
+        result = matrix_1 + matrix_2
+    elif operation == "Subtract":
+        result = matrix_1 - matrix_2
+    elif operation == "Multiply Element-wise":
+        result = matrix_1 * matrix_2
+    else:
+        result = "Invalid operation"
+    
+    st.success(f"Result of {operation}:")
+    st.write(result)
 
+   
+          
 # ------------------ Calculus & Algebra ------------------
 st.subheader("🧠 Calculus & Algebra")
 
