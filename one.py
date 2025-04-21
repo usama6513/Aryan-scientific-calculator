@@ -116,15 +116,15 @@ angle_rad = math.radians(angle_input)
 
 if shift:
         st.button("💾 Compute the trigonametric values")
-try:
+
         st.write(f"arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
         st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
         st.write(f"arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
         st.write(f"arccot(cot({angle_input}°)) = {math.degrees(math.acot(math.cot(angle_rad))):.4f}°")
         st.write(f"arcsec(sec({angle_input}°)) = {math.degrees(math.asec(math.sec(angle_rad))):.4f}°")
         st.write(f"arccosec(cosec({angle_input}°)) = {math.degrees(math.acosec(math.cosec(angle_rad))):.4f}°")
-    except ValueError:
-        st.error("❌ Invalid input for inverse functions.")
+    
+        
    
 else:
     st.write(f"sin({angle_input}°) = {math.sin(angle_rad):.4f}")
