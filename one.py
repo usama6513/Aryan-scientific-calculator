@@ -5,7 +5,7 @@ import math
 
 # Set page config
 st.set_page_config(page_title="Advanced Calculator", page_icon="📐", layout="wide")
-st.title("🧠 Advanced Calculator (Trig, Derivatives, Matrices, Factorization & Integrals)")
+st.title("🧠 Advanced Calculator ")
 
 # Add Custom Styles for a Stylish UI
 st.markdown("""
@@ -30,6 +30,14 @@ st.markdown("""
         }
         .stTextArea>label {
             font-size: 20px;
+        }
+        .answer_button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -143,18 +151,26 @@ if matrix_input:
 # Integral Section
 st.subheader("🔗 Integral Calculator")
 integral_input = st.text_input("Enter function to integrate (e.g. x**2, sin(x))", value="x**2")
+lower_limit = st.number_input("Enter lower limit for definite integral", value=0.0)
+upper_limit = st.number_input("Enter upper limit for definite integral", value=1.0)
 
 if integral_input:
     try:
         func_expr = sympify(integral_input)  # Convert to sympy expression
-        integral = integrate(func_expr, x)  # Calculate indefinite integral
-        st.write(f"Function: {func_expr}")
-        st.write(f"Indefinite Integral: {integral}")
+        indefinite_integral = integrate(func_expr, x)  # Calculate indefinite integral
         
-        # If the user asks for the evaluated value at the angle, evaluate the integral
-        if angle_sym:
-            integral_value = integral.evalf(subs={x: angle_rad})
-            st.write(f"Integral at angle ({angle_rad:.4f}): {integral_value:.4f}")
+        # Calculate definite integral
+        definite_integral = integrate(func_expr, (x, lower_limit, upper_limit))
+        
+        # Display the results
+        st.write(f"Function: {func_expr}")
+        st.write(f"Indefinite Integral: {indefinite_integral}")
+        
+        st.write(f"Definite Integral from {lower_limit} to {upper_limit}: {definite_integral}")
+        
+        # Add Answer Buttons
+        st.markdown(f"<button class='answer_button'>{definite_integral}</button>", unsafe_allow_html=True)
+        st.markdown(f"<button class='answer_button'>{indefinite_integral}</button>", unsafe_allow_html=True)
         
     except Exception as e:
         st.error(f"Invalid function for integral: {e}")
