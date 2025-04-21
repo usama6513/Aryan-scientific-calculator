@@ -115,13 +115,13 @@ angle_input = st.number_input("Enter angle in degrees:", value=0.0)
 angle_rad = math.radians(angle_input)
 
 if shift:
-    if st.button("🧠 Compute Inverse Trig Values"):
-       try:
+    
+    try:
         st.write(f"arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
         st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
         st.write(f"arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
         st.error("❌ Invalid input for inverse functions.")
-    except Exception as e:
+    except ValueError:
 else:
     st.write(f"sin({angle_input}°) = {math.sin(angle_rad):.4f}")
     st.write(f"cos({angle_input}°) = {math.cos(angle_rad):.4f}")
