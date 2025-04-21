@@ -178,8 +178,8 @@ try:
 
     elif operation_type == "Definite Integral":
         var_to_integrate = st.selectbox("Variable for definite integral:", variables)
-        lower_limit_raw = st.text_input(f"Lower limit for {var_to_integrate} (e.g., 0,3pi/2, pi, pi/2,2pi,5pi/2,3pi,7pi/2):", "0")
-        upper_limit_raw = st.text_input(f"Upper limit for {var_to_integrate} (e.g., pi0,3pi/2, pi, pi/2,2pi,5pi/2,3pi,7pi/2):", "0,3pi/2, pi, pi/2,2pi,5pi/2,3pi,7pi/2pi")
+        lower_limit_raw = st.text_input(f"Lower limit for {var_to_integrate} (e.g., 0,pi/2):", "0")
+        upper_limit_raw = st.text_input(f"Upper limit for {var_to_integrate} (e.g., pi):", "pi")
 
         if st.button("Calculate Definite Integral"):
             try:
@@ -193,7 +193,7 @@ try:
                 else:
                     st.warning("Variable not found in expression. Result = 0.")
             except SympifyError:
-                st.error("❌ Invalid limit. Use 0,3pi/2, pi, pi/2,2pi,5pi/2,3pi,7pi/2 etc.")
+                st.error("❌ Invalid limit. Use 0, pi,  etc.")
 except SympifyError as e:
     st.error(f"Invalid Expression: {e}")
 
