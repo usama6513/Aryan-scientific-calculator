@@ -66,21 +66,24 @@ shift = st.checkbox("Shift (Inverse Functions)")
 angle_input = st.number_input("Enter angle in degrees:", value=0.0)
 angle_rad = math.radians(angle_input)
 if st.button("💾 Compute Trigonometric Values"):
+    try:
 
-if shift:
-    st.write(f"arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
-    st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
-    st.write(f"arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
-    st.write(f"arccot(cot({angle_input}°)) = {math.degrees(arccot(cot(angle_rad))):.4f}°")
-    st.write(f"arcsec(sec({angle_input}°)) = {math.degrees(arcsec(sec(angle_rad))):.4f}°")
-    st.write(f"arccosec(cosec({angle_input}°)) = {math.degrees(arccosec(cosec(angle_rad))):.4f}°")
-else:
-    st.write(f"sin({angle_input}°) = {math.sin(angle_rad):.4f}")
-    st.write(f"cos({angle_input}°) = {math.cos(angle_rad):.4f}")
-    st.write(f"tan({angle_input}°) = {math.tan(angle_rad):.4f}")
-    st.write(f"cot({angle_input}°) = {cot(angle_rad):.4f}")
-    st.write(f"sec({angle_input}°) = {sec(angle_rad):.4f}")
-    st.write(f"cosec({angle_input}°) = {cosec(angle_rad):.4f}")
+       if shift:
+           st.write(f"arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
+           st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
+           st.write(f"arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
+           st.write(f"arccot(cot({angle_input}°)) = {math.degrees(arccot(cot(angle_rad))):.4f}°")
+           st.write(f"arcsec(sec({angle_input}°)) = {math.degrees(arcsec(sec(angle_rad))):.4f}°")
+           st.write(f"arccosec(cosec({angle_input}°)) = {math.degrees(arccosec(cosec(angle_rad))):.4f}°")
+       else:
+           st.write(f"sin({angle_input}°) = {math.sin(angle_rad):.4f}")
+           st.write(f"cos({angle_input}°) = {math.cos(angle_rad):.4f}")
+           st.write(f"tan({angle_input}°) = {math.tan(angle_rad):.4f}")
+           st.write(f"cot({angle_input}°) = {cot(angle_rad):.4f}")
+           st.write(f"sec({angle_input}°) = {sec(angle_rad):.4f}")
+           st.write(f"cosec({angle_input}°) = {cosec(angle_rad):.4f}")
+   except Exception as e:
+        st.error(f"Error: {e}")
 
 # ---------------- Matrix Operations ----------------
 st.subheader("🔢 Matrix Operations")
