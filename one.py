@@ -116,7 +116,7 @@ angle_rad = math.radians(angle_input)
 
 if shift:
         st.button("💾 Compute the trigonametric values")
-    try:
+try:
         st.write(f"arcsin(sin({angle_input}°)) = {math.degrees(math.asin(math.sin(angle_rad))):.4f}°")
         st.write(f"arccos(cos({angle_input}°)) = {math.degrees(math.acos(math.cos(angle_rad))):.4f}°")
         st.write(f"arctan(tan({angle_input}°)) = {math.degrees(math.atan(math.tan(angle_rad))):.4f}°")
