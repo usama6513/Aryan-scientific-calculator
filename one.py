@@ -138,7 +138,7 @@ st.write(matrix_1)
 st.write("Matrix 2:")
 st.write(matrix_2)
 
-operation = st.selectbox("Select matrix operation", ["Add", "Multiply"])
+operation = st.selectbox("Select matrix operation", ["Add","Sub","Divide","Determinent", "Multiply"])
 
 if st.button("💾 Perform Matrix Operation"):
     try:
